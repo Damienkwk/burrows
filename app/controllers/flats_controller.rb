@@ -15,11 +15,22 @@ class FlatsController < ApplicationController
   def create
     @flat = Flat.new(flat_params)
     @flat.user = current_user
-    if @flat.save
+    if @flat.save!
       redirect_to flats_path
     else
       render :new, status: :unprocessable_entity
     end
+
+    # respond_to do |format|
+    #   if @flat.save
+    #     format.html { redirect_to flats_path }
+    #     format.json # Follow the classic Rails flow and look for a create.json view
+    #   else
+    #     format.html { render "flats/new", status: :unprocessable_entity }
+    #     format.json # Follow the classic Rails flow and look for a create.json view
+    #   end
+    # end
+
   end
 
   def edit
