@@ -1,0 +1,9 @@
+<div class="container">
+
+  <h1>My saved places</h1>
+
+  <% @bookmarks.each do |bookmark| %>
+    <%= bookmark.flat.name %>
+  <% end %>
+
+</div>
