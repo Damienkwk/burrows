@@ -27,10 +27,16 @@ class FlatsController < ApplicationController
 
   def update
     @flat.update(flat_params)
+    if @flat.save
+      redirect_to flat_path(@flat)
+    else
+      render :new, status: :unprocessable_entity
+    end
   end
 
   def destroy
     @flat.destroy
+    redirect_to flats_path, status: :see_other
   end
 
   private
