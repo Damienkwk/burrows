@@ -2,6 +2,9 @@
 
 <% @flats.each do |flat| %>
   <%= link_to flat.name, flat_path(flat) %>
+  <%= simple_form_for ([@bookmark]) do |f| %>
+    <%= f.button :submit, "save" %>
+  <% end %>
 <% end %>
 
 <%= link_to 'New flat', new_flat_path %>

@@ -3,6 +3,7 @@ class FlatsController < ApplicationController
 
   def index
     @flats = Flat.all
+    @bookmark = Bookmark.new
   end
 
   def show
