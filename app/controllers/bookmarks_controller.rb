@@ -10,6 +10,7 @@ class BookmarksController < ApplicationController
     unless @bookmark.save
       Bookmark.find_by(user: current_user, flat: @bookmark.flat).destroy
     end
+    redirect_to root_path
   end
 
   private
