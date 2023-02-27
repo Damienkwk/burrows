@@ -2,7 +2,8 @@
 
 <% @flats.each do |flat| %>
   <%= link_to flat.name, flat_path(flat) %>
-  <%= simple_form_for ([@bookmark]) do |f| %>
+  <%= simple_form_for (@bookmark) do |f| %>
+    <%= f.hidden_field :flat_id, value: flat.id %>
     <%= f.button :submit, "save" %>
   <% end %>
 <% end %>
