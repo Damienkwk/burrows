@@ -3,4 +3,5 @@ Rails.application.routes.draw do
   root to: "flats#index"
   resources :flats
   resources :bookings, only: %i[index show]
+  resources :bookmarks, only: [:index, :create]
 end
