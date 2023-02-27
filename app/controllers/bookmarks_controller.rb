@@ -7,6 +7,7 @@ class BookmarksController < ApplicationController
   def create
     @bookmark = Bookmark.new(bookmark_params)
     @bookmark.user = current_user
+    # check whether the bookmark exists; if so delete it
     unless @bookmark.save
       Bookmark.find_by(user: current_user, flat: @bookmark.flat).destroy
     end
