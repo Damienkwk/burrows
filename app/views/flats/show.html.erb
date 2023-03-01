@@ -1,10 +1,21 @@
-<h1><%= @flat.name %></h1>
+<div class="container mt-5">
+  <h1><%= @flat.name %></h1>
 
-<p>Description: <%= @flat.description %></p>
-<p>Address: <%= @flat.address %></p>
-<p>Price per night: $<%= @flat.price_per_night %></p>
-<p>Number of guests: <%= @flat.number_of_guests %></p>
+  <p>Description: <%= @flat.description %></p>
+  <p>Address: <%= @flat.address %></p>
+  <p>Price per night: $<%= @flat.price_per_night %></p>
+  <p>Number of guests: <%= @flat.number_of_guests %></p>
 
-<%= link_to 'Edit details of this flat', edit_flat_path(@flat) %>
-<%= link_to 'Delete', flat_path(@flat), data: {turbo_method: :delete, turbo_confirm: "Are you sure?"} %>
-<%= link_to 'Back to all flats', flats_path %>
+  <%= link_to 'Edit details of this flat', edit_flat_path(@flat) %>
+  <%= link_to 'Delete', flat_path(@flat), data: {turbo_method: :delete, turbo_confirm: "Are you sure?"} %>
+  <%= link_to 'Back to all flats', flats_path %>
+</div>
+
+<div class="container mt-5">
+  <%= simple_form_for [@flat, @booking] do |f| %>
+    <%= f.input :start_date, as: :date, order: [:day, :month, :year] %>
+    <%= f.input :end_date, as: :date, order: [:day, :month, :year] %>
+    <%= f.input :number_of_guests %>
+    <%= f.submit %>
+  <% end %>
+</div>
