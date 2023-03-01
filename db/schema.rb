@@ -10,9 +10,16 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_02_27_124115) do
+ActiveRecord::Schema[7.0].define(version: 2023_03_01_113134) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "amenities", force: :cascade do |t|
+    t.integer "name"
+    t.integer "category"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
 
   create_table "bookings", force: :cascade do |t|
     t.datetime "start_date"
@@ -34,6 +41,15 @@ ActiveRecord::Schema[7.0].define(version: 2023_02_27_124115) do
     t.datetime "updated_at", null: false
     t.index ["flat_id"], name: "index_bookmarks_on_flat_id"
     t.index ["user_id"], name: "index_bookmarks_on_user_id"
+  end
+
+  create_table "flat_amenities", force: :cascade do |t|
+    t.bigint "flat_id", null: false
+    t.bigint "amenity_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["amenity_id"], name: "index_flat_amenities_on_amenity_id"
+    t.index ["flat_id"], name: "index_flat_amenities_on_flat_id"
   end
 
   create_table "flats", force: :cascade do |t|
@@ -66,5 +82,7 @@ ActiveRecord::Schema[7.0].define(version: 2023_02_27_124115) do
   add_foreign_key "bookings", "users"
   add_foreign_key "bookmarks", "flats"
   add_foreign_key "bookmarks", "users"
+  add_foreign_key "flat_amenities", "amenities"
+  add_foreign_key "flat_amenities", "flats"
   add_foreign_key "flats", "users"
 end

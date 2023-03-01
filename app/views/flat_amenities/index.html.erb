@@ -1,0 +1,8 @@
+<h1>Flat Amenities</h1>
+
+<ol></ol>
+  <% @flat_amenities.each do |flat_amenity| %>
+    <li><%= flat_amenity.amenity_id.name %></li>
+  <% end %>
+
+<%= link_to "Add amenities", new_flat_flat_amenity_path %>
