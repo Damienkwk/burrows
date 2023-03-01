@@ -1,7 +1,9 @@
 <div class="container">
-  <h1>Add rooms</h1>
+  <h1>Add a room to <%= @flat.name %></h1>
+  <p>Room <%= @flat.rooms.length + 1 %></p>
   <%= simple_form_for ([@flat, @room]) do |f| %>
     <%= f.input :name %>
     <%= f.button :submit %>
   <% end %>
+  <%= link_to "+ Add another room", new_flat_room_path(@flat) %>
 </div>
