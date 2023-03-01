@@ -23,6 +23,8 @@ class FlatAmenitiesController < ApplicationController
   end
 
   def destroy
+    @flat_amenity.destroy
+    redirect_to flat_flat_amenities_path, status: :see_other
   end
 
   private
