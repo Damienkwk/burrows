@@ -1,0 +1,10 @@
+<div class="container mt-5">
+  <h1>Edit Booking</h1>
+  <%= simple_form_for(@booking) do |f| %>
+    <%= f.input :start_date, as: :date, order: [:day, :month, :year], disabled: true %>
+    <%= f.input :end_date, as: :date, order: [:day, :month, :year], disabled: true %>
+    <%= f.input :number_of_guests, disabled: true %>
+    <%= f.input :status, collection: Booking::STATUSES %>
+    <%= f.submit %>
+  <% end %>
+</div>
