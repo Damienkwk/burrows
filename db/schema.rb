@@ -44,6 +44,15 @@ ActiveRecord::Schema[7.0].define(version: 2023_03_04_033416) do
     t.index ["user_id"], name: "index_bookmarks_on_user_id"
   end
 
+  create_table "flat_amenities", force: :cascade do |t|
+    t.bigint "flat_id", null: false
+    t.bigint "amenity_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["amenity_id"], name: "index_flat_amenities_on_amenity_id"
+    t.index ["flat_id"], name: "index_flat_amenities_on_flat_id"
+  end
+
   create_table "flats", force: :cascade do |t|
     t.string "name"
     t.string "address"
@@ -83,6 +92,8 @@ ActiveRecord::Schema[7.0].define(version: 2023_03_04_033416) do
   add_foreign_key "bookings", "users"
   add_foreign_key "bookmarks", "flats"
   add_foreign_key "bookmarks", "users"
+  add_foreign_key "flat_amenities", "amenities"
+  add_foreign_key "flat_amenities", "flats"
   add_foreign_key "flats", "users"
   add_foreign_key "rooms", "flats"
 end
