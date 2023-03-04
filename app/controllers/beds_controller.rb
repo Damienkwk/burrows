@@ -22,7 +22,7 @@ class BedsController < ApplicationController
       @beds.each do |bed|
         bed.save
       end
-      redirect_to new_flat_room_bed_path(@flat, @room)
+      redirect_to @flat
     end
   end
 

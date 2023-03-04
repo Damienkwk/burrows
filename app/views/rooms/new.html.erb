@@ -12,16 +12,6 @@
     <%= link_to "+ Add another room", new_flat_room_path(@flat) %>
     </div>
 
-    <div class="existing-rooms-wrapper">
-      <h2>Existing rooms</h2>
-      <div class="existing-rooms">
-        <% @flat.rooms.each do |room| %>
-          <div class="room">
-            <p><%= room.name %></p>
-            </p><%= link_to 'Delete', room_path(room), data: {turbo_method: :delete, turbo_confirm: "Are you sure?"} %></p>
-          </div>
-        <% end %>
-      </div>
-    </div>
+
   </div>
 </div>
