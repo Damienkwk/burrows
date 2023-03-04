@@ -1,6 +1,5 @@
 <div class="container mt-5">
   <h1><%= @flat.name %></h1>
-
   <p>Description: <%= @flat.description %></p>
   <p>Address: <%= @flat.address %></p>
   <p>Price per night: $<%= @flat.price_per_night %></p>
@@ -9,17 +8,40 @@
   <% if policy(@flat).edit? %>
     <%= link_to 'Edit details of this flat', edit_flat_path(@flat) %>
   <% end %>
+
   <% if policy(@flat).destroy? %>
     <%= link_to 'Delete', flat_path(@flat), data: {turbo_method: :delete, turbo_confirm: "Are you sure?"} %>
   <% end %>
+
   <%= link_to 'Back to all flats', flats_path %>
+
   <% if @flat.user == current_user %>
     <%= link_to "Add rooms", new_flat_room_path(@flat) %>
   <% end %>
+
   <hr>
+
   <% if @flat.user == current_user %>
     <h2>Own Property</h2>
   <% else %>
     <%= render "bookingform", flat: @flat, booking: @booking %>
   <% end %>
+
+  <%= link_to 'Amenities of this flat', flat_flat_amenities_path(@flat) %>
+
+  <div class="existing-rooms-wrapper">
+    <h2>Where you'll be sleeping</h2>
+    <%= link_to "Add/edit sleeping arrangements", new_flat_room_path(@flat) %>
+    <div class="existing-rooms">
+      <% @flat.rooms.each do |room| %>
+        <div class="room">
+          <p><strong><%= room.name %></strong></p>
+          <% room.beds.each do |room| %>
+              <p><%= room.category %></p>
+          <% end %>
+          </p><%= link_to 'Delete', room_path(room), data: {turbo_method: :delete, turbo_confirm: "Are you sure?"} %></p>
+        </div>
+      <% end %>
+    </div>
+  </div>
 </div>

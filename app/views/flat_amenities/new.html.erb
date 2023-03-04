@@ -1,0 +1,6 @@
+<h1>Add Amenity</h1>
+
+<%= simple_form_for [@flat, @flat_amenity] do |f| %>
+  <%= f.association :amenity, label: "Select the amenities", as: :check_boxes %>
+  <%= f.submit %>
+<% end %>
