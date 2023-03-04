@@ -9,7 +9,7 @@ class RoomsController < ApplicationController
     @room = Room.new(room_params)
     @room.flat = @flat
     if @room.save
-      redirect_to new_flat_room_path(@flat)
+      redirect_to new_flat_room_bed_path(@flat, @room)
     else
       render :new, status: :unprocessable_entity
     end
@@ -18,7 +18,7 @@ class RoomsController < ApplicationController
   def destroy
     @room = Room.find(params[:id])
     @room.destroy
-    redirect_to new_flat_room_path(@room.flat), status: :see_other
+    redirect_to flat_path(@room.flat_id), status: :see_other
   end
 
   private
