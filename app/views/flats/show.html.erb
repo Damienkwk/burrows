@@ -6,17 +6,20 @@
   <p>Price per night: $<%= @flat.price_per_night %></p>
   <p>Number of guests: <%= @flat.number_of_guests %></p>
 
-  <%= link_to 'Edit details of this flat', edit_flat_path(@flat) %>
-  <%= link_to 'Delete', flat_path(@flat), data: {turbo_method: :delete, turbo_confirm: "Are you sure?"} %>
+  <% if policy(@flat).edit? %>
+    <%= link_to 'Edit details of this flat', edit_flat_path(@flat) %>
+  <% end %>
+  <% if policy(@flat).destroy? %>
+    <%= link_to 'Delete', flat_path(@flat), data: {turbo_method: :delete, turbo_confirm: "Are you sure?"} %>
+  <% end %>
   <%= link_to 'Back to all flats', flats_path %>
-  <%= link_to "Add rooms", new_flat_room_path(@flat) %>
-</div>
-
-<div class="container mt-5">
-  <%= simple_form_for [@flat, @booking] do |f| %>
-    <%= f.input :start_date, as: :date, order: [:day, :month, :year] %>
-    <%= f.input :end_date, as: :date, order: [:day, :month, :year] %>
-    <%= f.input :number_of_guests %>
-    <%= f.submit %>
+  <% if @flat.user == current_user %>
+    <%= link_to "Add rooms", new_flat_room_path(@flat) %>
+  <% end %>
+  <hr>
+  <% if @flat.user == current_user %>
+    <h2>Own Property</h2>
+  <% else %>
+    <%= render "bookingform", flat: @flat, booking: @booking %>
   <% end %>
 </div>

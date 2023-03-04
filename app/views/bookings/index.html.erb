@@ -2,9 +2,11 @@
   <h1>My Bookings</h1>
   <ol>
     <% @bookings.each do |booking| %>
-      <li>
-        <%= link_to booking.flat.name, booking_path(booking) %>
-      </li>
+        <% if booking.flat.user == current_user || booking.user == current_user %>
+          <li>
+            <%= link_to booking.flat.name, booking_path(booking) %>
+          </li>
+        <% end %>
     <% end %>
   </ol>
 </div>

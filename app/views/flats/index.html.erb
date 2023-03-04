@@ -1,6 +1,5 @@
 <h1>All Flats</h1>
 
-
 <% @flats.each do |flat| %>
   <%= link_to flat.name, flat_path(flat) %>
   <%= simple_form_for (@bookmark) do |f| %>

@@ -2,7 +2,7 @@ class FlatsController < ApplicationController
   before_action :set_flat, only: %i[show edit update destroy]
 
   def index
-    @flats = Flat.all
+    @flats = policy_scope(Flat)
     @bookmark = Bookmark.new
   end
 
@@ -12,11 +12,13 @@ class FlatsController < ApplicationController
 
   def new
     @flat = Flat.new
+    authorize @flat
   end
 
   def create
     @flat = Flat.new(flat_params)
     @flat.user = current_user
+    authorize @flat
     if @flat.save!
       redirect_to flats_path
     else
@@ -45,6 +47,7 @@ class FlatsController < ApplicationController
 
   def set_flat
     @flat = Flat.find(params[:id])
+    authorize @flat
   end
 
   def flat_params

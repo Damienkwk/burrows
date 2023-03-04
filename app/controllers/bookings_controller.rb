@@ -3,7 +3,7 @@ class BookingsController < ApplicationController
   before_action :set_booking, only: %i[show edit update]
 
   def index
-    @bookings = Booking.all
+    @bookings = policy_scope(Booking)
   end
 
   def show
@@ -14,6 +14,7 @@ class BookingsController < ApplicationController
     @booking.flat = @flat
     @booking.user = current_user
     @booking.status = 'pending'
+    authorize @booking
     if @booking.save
       redirect_to bookings_path
     else
@@ -37,6 +38,7 @@ class BookingsController < ApplicationController
 
   def set_booking
     @booking = Booking.find(params[:id])
+    authorize @booking
   end
 
   def booking_params

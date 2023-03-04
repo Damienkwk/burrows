@@ -3,11 +3,13 @@ class RoomsController < ApplicationController
 
   def new
     @room = Room.new
+    authorize @room
   end
 
   def create
     @room = Room.new(room_params)
     @room.flat = @flat
+    authorize @room
     if @room.save
       redirect_to new_flat_room_path(@flat)
     else
@@ -17,6 +19,7 @@ class RoomsController < ApplicationController
 
   def destroy
     @room = Room.find(params[:id])
+    authorize @room
     @room.destroy
     redirect_to new_flat_room_path(@room.flat), status: :see_other
   end
