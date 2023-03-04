@@ -38,10 +38,17 @@
             <div class="room">
               <p><strong><%= room.name %></strong></p>
               <% room.beds.each do |room| %>
-                <p><%= room.category %></p>
+                <% if room.category == "Single bed" %>
+                  <i class="fa-solid fa-bed"></i> <%= room.category %>
+                <% elsif room.category == "Double bed" %>
+                  <i class="fa-solid fa-people-robbery"></i> <%= room.category %>
+                <% elsif room.category == "Sofa bed"%>
+                  <i class="fa-solid fa-couch"></i> <%= room.category %>
+                <% end %>
+                <br>
               <% end %>
               </p>
-                <%= link_to room_path(room), data: {turbo_method: :delete, turbo_confirm: "Are you sure?"} do %>
+                <%= link_to room_path(room), data: {turbo_method: :delete, turbo_confirm: "Are you sure?"}, class: "trash" do %>
                   <i class="fa-solid fa-trash"></i>
                 <% end %>
               </p>
