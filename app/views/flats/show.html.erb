@@ -10,6 +10,7 @@
   <%= link_to 'Amenities of this flat', flat_flat_amenities_path(@flat) %>
   <%= link_to 'Delete', flat_path(@flat), data: {turbo_method: :delete, turbo_confirm: "Are you sure?"} %>
   <%= link_to 'Back to all flats', flats_path %>
+  <%= link_to "Add rooms", new_flat_room_path(@flat) %>
 </div>
 
 <div class="container mt-5">
