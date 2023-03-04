@@ -2,9 +2,24 @@
 
   <h1>My saved places</h1>
 
-  <% @bookmarks.each do |bookmark| %>
-    <%= bookmark.flat.name %>
-    <%= link_to 'delete', bookmark_path(bookmark), data: {turbo_method: :delete, turbo_confirm: "Are you sure?"} %>
-  <% end %>
+  <div class="cards">
+    <% @bookmarks.each do |bookmark|  %>
+      <div class="card">
+        <a href=<%= flat_path(bookmark.flat)%>><%= cl_image_tag bookmark.flat.photos.first.key, height: 300, width: 300, crop: :fill, class: "card-photo" %></a>
+
+        <div class="flat-info">
+          <div class="flat-name-and-heart">
+            <strong><%= link_to bookmark.flat.name, flat_path(bookmark.flat) %></strong>
+            <%= link_to 'delete', bookmark_path(bookmark), data: {turbo_method: :delete, turbo_confirm: "Are you sure?"} %>
+          </div>
+          <p><%= bookmark.flat.address %></p>
+          <div class="flat-details">
+            <p><i class="fa-solid fa-person"></i> <%= bookmark.flat.number_of_guests %></p>
+            <p>$<%= bookmark.flat.price_per_night %>/night</p>
+          </div>
+        </div>
+      </div>
+      <% end %>
+  </div>
 
 </div>
