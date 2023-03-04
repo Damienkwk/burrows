@@ -1,55 +1,84 @@
 <div class="container mt-5">
   <h1><%= @flat.name %></h1>
-  <p>Description: <%= @flat.description %></p>
-  <p>Address: <%= @flat.address %></p>
-  <p>Price per night: $<%= @flat.price_per_night %></p>
-  <p>Number of guests: <%= @flat.number_of_guests %></p>
+  <p><%= @flat.description %></p>
 
-  <%= link_to 'Back to all flats', flats_path %>
-
-  <% if policy(@flat).edit? %>
-    <%= link_to 'Edit details of this flat', edit_flat_path(@flat) %>
-  <% end %>
-
-  <% if @flat.user == current_user %>
-    <%= link_to "Add rooms", new_flat_room_path(@flat) %>
-    <%= link_to 'Amenities of this flat', flat_flat_amenities_path(@flat) %>
-  <% end %>
-
-  <% if policy(@flat).destroy? %>
-    <%= link_to 'Delete', flat_path(@flat), data: {turbo_method: :delete, turbo_confirm: "Are you sure?"} %>
-  <% end %>
-
-  <hr>
-
-  <div class="existing-rooms-wrapper">
-    <h2>Where you'll be sleeping</h2>
-    <% if @flat.user == current_user %>
-      <%= link_to "Add/edit sleeping arrangements", new_flat_room_path(@flat) %>
-    <% end %>
-    <div class="existing-rooms">
-      <% @flat.rooms.each do |room| %>
-        <div class="room">
-          <p><strong><%= room.name %></strong></p>
-          <% room.beds.each do |room| %>
-              <p><%= room.category %></p>
-          <% end %>
-          <% if @flat.user == current_user %>
-            </p><%= link_to 'Delete', room_path(room), data: {turbo_method: :delete, turbo_confirm: "Are you sure?"} %></p>
-          <% end %>
-        </div>
-      <% end %>
-    </div>
+  <div class="flat-info-show-page">
+    <p><%= @flat.address %></p>
+    <p><i class="fa-solid fa-person"></i> <%= @flat.number_of_guests %></p>
+    <p>$<%= @flat.price_per_night %>/night</p>
   </div>
 
-  <hr>
+  <div class="flat-photos">
+    <% @flat.photos.each do |photo| %>
+      <%= cl_image_tag photo.key, height: 300, width: 400, crop: :fill %>
+    <% end %>
+  </div>
 
-  <% if @flat.user == current_user %>
-    <h2>Own Property</h2>
-  <% else %>
-    <h2>Reserve Property</h2>
-    <%= render "bookingform", flat: @flat, booking: @booking %>
-  <% end %>
+  <div class="show-body">
+
+    <div class="show-body-left">
+      <div class="user-details mt-4">
+        <h3>Entire flat hosted by <%= @flat.user.first_name %></h3>
+      </div>
+
+      <div class="flat-buttons mt-4 mb-4 border-bottom">
+        <% if policy(@flat).edit? %>
+          <%= link_to 'Edit flat details', edit_flat_path(@flat), class: "btn-ghost" %>
+        <% end %>
+        <% if @flat.user == current_user %>
+          <%= link_to 'Flat amenities', flat_flat_amenities_path(@flat), class: "btn-ghost" %>
+        <% end %>
+        <% if policy(@flat).destroy? %>
+          <%= link_to 'Delete flat', flat_path(@flat), data: {turbo_method: :delete, turbo_confirm: "Are you sure?"}, class: "btn-ghost" %>
+        <% end %>
+        <%= link_to 'Back to all flats', flats_path, class: "btn-ghost" %>
+      </div>
 
 
-</div>
+      <div class="existing-rooms-wrapper mt-4 mb-4 border-bottom">
+        <h3>Where you'll be sleeping</h3>
+        <% if @flat.user == current_user %>
+          <%= link_to "Add/edit sleeping arrangements", new_flat_room_path(@flat) %>
+        <% end %>
+        <div class="existing-rooms">
+          <% @flat.rooms.each do |room| %>
+            <div class="room">
+              <p><strong><%= room.name %></strong></p>
+              <% room.beds.each do |room| %>
+                <% if room.category == "Single bed" %>
+                  <i class="fa-solid fa-bed"></i> <%= room.category %>
+                <% elsif room.category == "Double bed" %>
+                  <i class="fa-solid fa-people-robbery"></i> <%= room.category %>
+                <% elsif room.category == "Sofa bed"%>
+                  <i class="fa-solid fa-couch"></i> <%= room.category %>
+                <% end %>
+                <br>
+              <% end %>
+              </p>
+                <% if @flat.user == current_user %>
+                  <%= link_to room_path(room), data: {turbo_method: :delete, turbo_confirm: "Are you sure?"}, class: "trash" do %>
+                    <i class="fa-solid fa-trash"></i>
+                  <% end %>
+                <% end  %>
+              </p>
+            </div>
+          <% end %>
+      </div>
+    </div>
+
+    </div>
+    <div class="show-body-right">
+      <% if @flat.user == current_user %>
+        <h3>Own Property</h3>
+      <% else %>
+        <h3>Make a booking</h3>
+        <%= simple_form_for [@flat, @booking] do |f| %>
+          <%= f.input :start_date, as: :date, order: [:day, :month, :year] %>
+          <%= f.input :end_date, as: :date, order: [:day, :month, :year] %>
+          <%= f.input :number_of_guests %>
+          <%= f.button :submit, class: "btn-ghost" %>
+        <% end %>
+      <% end %>
+    </div>
+
+  </div>

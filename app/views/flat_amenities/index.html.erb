@@ -1,13 +1,29 @@
-<h1>Flat Amenities</h1>
+<%# <h1>Flat Amenities</h1> %>
 
-<ol></ol>
-  <% @flat_amenities.each do |flat_amenity| %>
-    <li>
-      <%= flat_amenity.amenity.icon.html_safe %>
-      <%= flat_amenity.amenity.name %>
-      (<%= flat_amenity.amenity.category %>)
-      <%= link_to "(Delete)", flat_amenity_path(flat_amenity), data: {turbo_method: :delete, turbo_confirm: "Are you sure?"}  %>
-    </li>
+<%# <ol></ol> %>
+  <%# <% @flat_amenities.each do |flat_amenity| %>
+    <%# <li> %>
+      <%# <%= flat_amenity.amenity.icon.html_safe %>
+      <%# <%= flat_amenity.amenity.name %>
+      <%# (<%= flat_amenity.amenity.category %>
+      <%# <%= link_to "(Delete)", flat_amenity_path(flat_amenity), data: {turbo_method: :delete, turbo_confirm: "Are you sure?"}  %>
+    <%# </li> %>
+<div class="amenity-container">
+  <h1>Flat Amenities</h1>
+  <%= link_to "Add amenities", new_flat_flat_amenity_path %>
+  <%= link_to "Back to flat", flat_path(@flat) %>
+  <% @categorised_flat_amenities.each do |category| %>
+    <% unless category.values[0].empty? %>
+      <h2 class="amenity-category"><%= category.keys[0] %></h2>
+      <% category.values.each do |amenities| %>
+        <% amenities.each do |amenity| %>
+          <div class="amenity-card">
+            <p class="amenity-logo"><%= Amenity.find(amenity.amenity_id).icon.html_safe %></p>
+            <p class="amenity-name"><%= Amenity.find(amenity.amenity_id).name %></p>
+            <p class="amenity-delete"><%= link_to "(Delete)", flat_amenity_path(amenity), data: {turbo_method: :delete, turbo_confirm: "Are you sure?"}  %></p>
+          </div>
+        <% end %>
+      <% end %>
+    <% end %>
   <% end %>
-
-<%= link_to "Add amenities", new_flat_flat_amenity_path %>
+</div>
