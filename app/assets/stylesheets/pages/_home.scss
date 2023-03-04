@@ -1,1 +1,47 @@
 // Specific CSS for your home-page
+.cards {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  padding: 20px;
+}
+
+.card-photo {
+  border-radius: 20px;
+  box-shadow: rgba(149, 157, 165, 0.2) 0px 8px 24px;
+}
+
+.card {
+  height: 400px;
+  width: 300px;
+  border: none;
+  background-color: rgba(245, 245, 245, 1);
+}
+
+.hosting-link {
+  text-align: right;
+  padding-right: 20px;
+}
+
+.flat-info {
+  padding: 5px;
+}
+
+.flat-name-and-heart, .flat-details {
+  display: flex;
+  justify-content: space-between;
+}
+
+a {
+  text-decoration: none;
+  color: black;
+}
+
+a:hover {
+  opacity: 0.8;
+  color: black;
+}
+
+.card p {
+  margin: 0;
+}

@@ -1,0 +1,56 @@
+.flat-photos {
+  display: flex;
+  justify-content: space-between;
+}
+
+.flat-info-show-page {
+  display: flex;
+}
+
+.flat-info-show-page p {
+  margin-right: 30px;
+}
+
+.flat-buttons .btn-ghost {
+  margin-right: 10px;
+}
+
+.flat-buttons {
+  padding-bottom: 40px;
+}
+
+.existing-rooms {
+  display: flex;
+  justify-content: left;
+}
+
+
+.room {
+  position: relative;
+  height: 150px;
+  width: 200px;
+  border: 1px solid lightgrey;
+  border-radius: 10px;
+  padding: 15px;
+  margin: 15px;
+  text-align: center;
+}
+
+
+.trash {
+  position: absolute;
+  right: 10px;
+  bottom: 10px;
+  opacity: 0.5;
+}
+
+.show-body {
+  display: flex;
+  justify-content: space-between;
+}
+
+.show-body-right {
+  padding: 40px;
+  margin: 40px;
+  box-shadow: rgba(50, 50, 93, 0.25) 0px 6px 12px -2px, rgba(0, 0, 0, 0.3) 0px 3px 7px -3px;
+}
