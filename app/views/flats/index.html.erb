@@ -1,18 +1,31 @@
-<h1>All Flats</h1>
-
-
-<% @flats.each do |flat| %>
-  <%= link_to flat.name, flat_path(flat) %>
-  <%= simple_form_for (@bookmark) do |f| %>
-    <%= f.hidden_field :flat_id, value: flat.id %>
-    <button id="heart-button" type="submit">
-      <% if current_user.bookmarks.any? { |bookmark| bookmark.flat == flat } %>
-        <i class="fa-solid fa-heart"></i>
-      <% else %>
-        <i class="fa-regular fa-heart"></i>
+<div class="container">
+  <div class="cards">
+    <% @flats.each do |flat| %>
+      <div class="card">
+        <%= cl_image_tag flat.photos.first.key, height: 300, width: 300, crop: :fill, class: "card-photo" %>
+        <div class="flat-info">
+          <div class="flat-name-and-heart">
+            <strong><%= link_to flat.name, flat_path(flat) %></strong>
+            <%= simple_form_for (@bookmark) do |f| %>
+              <%= f.hidden_field :flat_id, value: flat.id %>
+              <button id="heart-button" type="submit">
+                <% if current_user.bookmarks.any? { |bookmark| bookmark.flat == flat } %>
+                  <i class="fa-solid fa-heart"></i>
+                <% else %>
+                  <i class="fa-regular fa-heart"></i>
+                <% end %>
+              </button>
+            <% end %>
+          </div>
+          <p><%= flat.address %></p>
+          <div class="flat-details">
+            <p><i class="fa-solid fa-person"></i> <%= flat.number_of_guests %></p>
+            <p>$<%= flat.price_per_night %>/night</p>
+          </div>
+        </div>
+      </div>
       <% end %>
-    </button>
-  <% end %>
-<% end %>
+  </div>
 
-<%= link_to 'New flat', new_flat_path %>
+  <%= link_to 'New flat', new_flat_path %>
+</div>

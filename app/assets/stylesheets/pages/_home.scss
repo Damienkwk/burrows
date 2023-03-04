@@ -1,1 +1,29 @@
 // Specific CSS for your home-page
+.cards {
+  display: flex;
+  justify-content: space-between;
+  padding: 20px;
+}
+
+.flat-info {
+  padding: 5px;
+}
+
+.flat-name-and-heart, .flat-details {
+  display: flex;
+  justify-content: space-between;
+}
+
+a {
+  text-decoration: none;
+  color: black;
+}
+
+a:hover {
+  opacity: 0.6;
+  color: black;
+}
+
+.card p {
+  margin: 0;
+}
