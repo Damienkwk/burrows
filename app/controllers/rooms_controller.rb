@@ -5,6 +5,9 @@ class RoomsController < ApplicationController
     @room = Room.new
   end
 
+  def show
+  end
+
   def create
     @room = Room.new(room_params)
     @room.flat = @flat

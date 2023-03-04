@@ -1,22 +1,27 @@
-<div class="container rooms">
-  <div class="add-room">
-  <h1>Add a room to <%= @flat.name %></h1>
-  <p>Room <%= @flat.rooms.length + 1 %></p>
-  <%= simple_form_for ([@flat, @room]) do |f| %>
-    <%= f.input :name %>
-    <%= f.button :submit %>
-  <% end %>
-  <br>
-  <%= link_to "+ Add another room", new_flat_room_path(@flat) %>
-  </div>
-
-  <div class="existing-rooms">
-    <h2>Rooms you have in <%= @flat.name %></h2>
-    <% @flat.rooms.each do |room| %>
-      <p>
-        <%= room.name %>
-        <%= link_to 'Delete', room_path(room), data: {turbo_method: :delete, turbo_confirm: "Are you sure?"} %>
-      </p>
+<div class="container">
+  <div class="rooms">
+    <div class="add-room">
+    <h1><%= @flat.name %></h1>
+    <h3>Sleeping arrangements</h3>
+    <p>Room <%= @flat.rooms.length + 1 %></p>
+    <%= simple_form_for ([@flat, @room]) do |f| %>
+      <%= f.input :name, label: "Type", as: :radio_buttons, collection: ["Bedroom", "Living Room"] %>
+      <%= f.button :submit, class: "btn-ghost"%>
     <% end %>
+    <br>
+    <%= link_to "+ Add another room", new_flat_room_path(@flat) %>
+    </div>
+
+    <div class="existing-rooms-wrapper">
+      <h2>Existing rooms</h2>
+      <div class="existing-rooms">
+        <% @flat.rooms.each do |room| %>
+          <div class="room">
+            <p><%= room.name %></p>
+            </p><%= link_to 'Delete', room_path(room), data: {turbo_method: :delete, turbo_confirm: "Are you sure?"} %></p>
+          </div>
+        <% end %>
+      </div>
+    </div>
   </div>
 </div>
