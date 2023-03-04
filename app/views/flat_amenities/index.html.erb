@@ -3,9 +3,9 @@
 <ol></ol>
   <% @flat_amenities.each do |flat_amenity| %>
     <li>
-      <%= Amenity.find(flat_amenity.amenity_id).icon.html_safe %>
-      <%= Amenity.find(flat_amenity.amenity_id).name %>
-      (<%= Amenity.find(flat_amenity.amenity_id).category %>)
+      <%= flat_amenity.amenity.icon.html_safe %>
+      <%= flat_amenity.amenity.name %>
+      (<%= flat_amenity.amenity.category %>)
       <%= link_to "(Delete)", flat_amenity_path(flat_amenity), data: {turbo_method: :delete, turbo_confirm: "Are you sure?"}  %>
     </li>
   <% end %>

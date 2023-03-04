@@ -3,6 +3,7 @@ class BedsController < ApplicationController
 
   def new
     @bed = Bed.new
+    authorize @bed
     @beds = Bed.all
   end
 
@@ -13,6 +14,7 @@ class BedsController < ApplicationController
       if cat.length > 0
         @bed = Bed.new(category: cat)
         @bed.room = @room
+        authorize @bed
         @beds.push(@bed)
       end
     end
