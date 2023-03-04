@@ -14,6 +14,14 @@ ActiveRecord::Schema[7.0].define(version: 2023_03_04_033416) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
+  create_table "amenities", force: :cascade do |t|
+    t.string "name"
+    t.string "category"
+    t.string "icon"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
   create_table "beds", force: :cascade do |t|
     t.string "category"
     t.bigint "room_id", null: false
