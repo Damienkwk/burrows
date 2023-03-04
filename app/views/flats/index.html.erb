@@ -4,16 +4,6 @@
     <% @flats.each do |flat| %>
       <div class="card">
         <a href=<%= flat_path(flat)%>><%= cl_image_tag flat.photos.first.key, height: 300, width: 300, crop: :fill, class: "card-photo" %></a>
-
-<%# <% @flats.each do |flat| %>
-  <%# <%= link_to flat.name, flat_path(flat) %>
-  <%# <%= simple_form_for (@bookmark) do |f| %>
-    <%# <%= f.hidden_field :flat_id, value: flat.id %>
-    <%# <button id="heart-button" type="submit"> %>
-      <%# <% if current_user.bookmarks.any? { |bookmark| bookmark.flat == flat } %>
-        <%# <i class="fa-solid fa-heart"></i> %>
-      <%# <% else %>
-        <%# <i class="fa-regular fa-heart"></i> %>
         <div class="flat-info">
           <div class="flat-name-and-heart">
             <strong><%= link_to flat.name, flat_path(flat) %></strong>

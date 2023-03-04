@@ -1,7 +1,5 @@
 class BookmarksController < ApplicationController
-
   def index
-    # @bookmarks = current_user.bookmarks
     @bookmarks = policy_scope(Bookmark)
   end
 
@@ -28,5 +26,4 @@ class BookmarksController < ApplicationController
   def bookmark_params
     params.require(:bookmark).permit(:flat_id)
   end
-
 end

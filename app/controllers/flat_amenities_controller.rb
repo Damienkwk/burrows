@@ -4,7 +4,6 @@ class FlatAmenitiesController < ApplicationController
   def index
     @flat = Flat.find(params[:flat_id])
     @flat_amenities = policy_scope(FlatAmenity)
-    # @flat_amenities = @flat.flat_amenities.joins(:amenity).order(:category)
     @flat_amenities = FlatAmenity.where(flat_id: @flat)
     @categories = Amenity.distinct.pluck(:category)
     @categorised_flat_amenities = []
