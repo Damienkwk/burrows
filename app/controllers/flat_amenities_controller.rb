@@ -13,18 +13,18 @@ class FlatAmenitiesController < ApplicationController
 
   def create
     @flat = Flat.find(params[:flat_id])
-    @flat_amenity = FlatAmenity.new(flat_amenity_params)
-    @flat_amenity.flat = @flat
-    if @flat_amenity.save!
-      redirect_to flat_flat_amenities_path
-    else
-      render :new, status: :unprocessable_entity
+    selected_amenities = flat_amenity_params
+    selected_amenities[:amenity_id].each do |param|
+      @flat_amenity = FlatAmenity.new({amenity_id: param})
+      @flat_amenity.flat = @flat
+      @flat_amenity.save
     end
+    redirect_to flat_flat_amenities_path(@flat.id)
   end
 
   def destroy
     @flat_amenity.destroy
-    redirect_to flat_flat_amenities_path, status: :see_other
+    redirect_to flat_flat_amenities_path(@flat_amenity.flat_id), status: :see_other
   end
 
   private
@@ -34,6 +34,6 @@ class FlatAmenitiesController < ApplicationController
   end
 
   def flat_amenity_params
-    params.require(:flat_amenity).permit(:amenity_id)
+    params.require(:flat_amenity).permit(amenity_id:[])
   end
 end
