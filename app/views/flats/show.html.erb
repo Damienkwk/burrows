@@ -1,6 +1,5 @@
 <div class="container mt-5">
   <h1><%= @flat.name %></h1>
-
   <p><%= @flat.description %></p>
 
   <div class="flat-info-show-page">
@@ -23,16 +22,22 @@
       </div>
 
       <div class="flat-buttons mt-4 mb-4 border-bottom">
-        <%= link_to 'Edit flat details', edit_flat_path(@flat), class: "btn-ghost" %>
-        <%= link_to 'Flat amenities', flat_flat_amenities_path(@flat), class: "btn-ghost" %>
-        <%= link_to 'Delete flat', flat_path(@flat), data: {turbo_method: :delete, turbo_confirm: "Are you sure?"}, class: "btn-ghost" %>
         <%= link_to 'Back to all flats', flats_path, class: "btn-ghost" %>
+        <% if policy(@flat).edit? %>
+          <%= link_to 'Edit flat details', edit_flat_path(@flat), class: "btn-ghost" %>
+        <% end %>
+        <%= link_to 'Flat amenities', flat_flat_amenities_path(@flat), class: "btn-ghost" %>
+        <% if policy(@flat).destroy? %>
+          <%= link_to 'Delete flat', flat_path(@flat), data: {turbo_method: :delete, turbo_confirm: "Are you sure?"}, class: "btn-ghost" %>
+        <% end %>
       </div>
 
 
       <div class="existing-rooms-wrapper mt-4 mb-4 border-bottom">
         <h3>Where you'll be sleeping</h3>
-        <%= link_to "Add/edit sleeping arrangements", new_flat_room_path(@flat) %>
+        <% if @flat.user == current_user %>
+          <%= link_to "Add/edit sleeping arrangements", new_flat_room_path(@flat) %>
+        <% end %>
         <div class="existing-rooms">
           <% @flat.rooms.each do |room| %>
             <div class="room">
@@ -48,9 +53,11 @@
                 <br>
               <% end %>
               </p>
-                <%= link_to room_path(room), data: {turbo_method: :delete, turbo_confirm: "Are you sure?"}, class: "trash" do %>
-                  <i class="fa-solid fa-trash"></i>
-                <% end %>
+                <% if @flat.user == current_user %>
+                  <%= link_to room_path(room), data: {turbo_method: :delete, turbo_confirm: "Are you sure?"}, class: "trash" do %>
+                    <i class="fa-solid fa-trash"></i>
+                  <% end %>
+                <% end  %>
               </p>
             </div>
           <% end %>
@@ -59,6 +66,9 @@
 
     </div>
     <div class="show-body-right">
+      <% if @flat.user == current_user %>
+        <h3>Own Property</h3>
+      <% else %>
         <h3>Make a booking</h3>
         <%= simple_form_for [@flat, @booking] do |f| %>
           <%= f.input :start_date, as: :date, order: [:day, :month, :year] %>
@@ -66,6 +76,7 @@
           <%= f.input :number_of_guests %>
           <%= f.button :submit, class: "btn-ghost" %>
         <% end %>
+      <% end %>
     </div>
 
   </div>

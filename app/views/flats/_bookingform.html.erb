@@ -1,0 +1,6 @@
+<%= simple_form_for [flat, booking] do |f| %>
+  <%= f.input :start_date, as: :date, order: [:day, :month, :year] %>
+  <%= f.input :end_date, as: :date, order: [:day, :month, :year] %>
+  <%= f.input :number_of_guests %>
+  <%= f.submit %>
+<% end %>

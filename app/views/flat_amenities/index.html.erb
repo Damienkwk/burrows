@@ -1,6 +1,8 @@
 <div class="amenity-container">
   <h1>Flat Amenities</h1>
-  <%= link_to "Add amenities", new_flat_flat_amenity_path %>
+  <% if @flat.user == current_user %>
+    <%= link_to "Add amenities", new_flat_flat_amenity_path %>
+  <% end %>
   <%= link_to "Back to flat", flat_path(@flat) %>
   <% @categorised_flat_amenities.each do |category| %>
     <% unless category.values[0].empty? %>
@@ -10,7 +12,9 @@
           <div class="amenity-card">
             <p class="amenity-logo"><%= Amenity.find(amenity.amenity_id).icon.html_safe %></p>
             <p class="amenity-name"><%= Amenity.find(amenity.amenity_id).name %></p>
-            <p class="amenity-delete"><%= link_to "(Delete)", flat_amenity_path(amenity), data: {turbo_method: :delete, turbo_confirm: "Are you sure?"}  %></p>
+            <% if @flat.user == current_user %>
+              <p class="amenity-delete"><%= link_to "(Delete)", flat_amenity_path(amenity), data: {turbo_method: :delete, turbo_confirm: "Are you sure?"}  %></p>
+            <% end %>
           </div>
         <% end %>
       <% end %>

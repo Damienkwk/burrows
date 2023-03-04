@@ -7,8 +7,10 @@
       <li>Check-in Date: <%= @booking.start_date.to_date %></li>
       <li>Check-out Date: <%= @booking.end_date.to_date %></li>
       <li>Booking Status: <%= @booking.status %></li>
+      <li>Host: <%= @booking.flat.user.first_name %></li>
     </ul>
-    <% if @booking.flat.user == current_user %>
+    <% if policy(@booking).edit? %>
       <%= link_to 'edit', edit_booking_path(@booking), class: 'btn-ghost' %>
     <% end %>
+    <%= link_to 'back', bookings_path, class: 'btn btn-flat' %>
 </div>
