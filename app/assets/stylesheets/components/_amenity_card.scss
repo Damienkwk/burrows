@@ -1,0 +1,21 @@
+.amenity-card {
+  display: flex;
+  height: 50px;
+  width: 500px;
+  margin: 0 auto;
+  padding: 30px 10px 50px;
+  border-bottom: 1px solid #DDDDDD;
+}
+
+.amenity-logo {
+  padding-right: 30px;
+}
+
+.amenity-name {
+  padding-right: 15px;
+}
+
+.amenity-delete a {
+  text-decoration: none;
+  color: lightslategrey;
+}

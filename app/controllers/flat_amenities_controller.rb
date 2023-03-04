@@ -3,7 +3,18 @@ class FlatAmenitiesController < ApplicationController
 
   def index
     @flat = Flat.find(params[:flat_id])
-    @flat_amenities = FlatAmenity.joins(:amenity).where(flat_id: @flat).order(:category)
+    @flat_amenities = FlatAmenity.where(flat_id: @flat)
+    @categories = Amenity.distinct.pluck(:category)
+    @categorised_flat_amenities = []
+    @categories.each do |category|
+      categorised_amenities = { category => [] }
+      @flat_amenities.each do |flat_amenity|
+        if Amenity.find(flat_amenity.amenity_id).category == category
+          categorised_amenities[category].append(flat_amenity)
+        end
+      end
+      @categorised_flat_amenities.append(categorised_amenities)
+    end
   end
 
   def new
