@@ -5,14 +5,11 @@ class RoomsController < ApplicationController
     @room = Room.new
   end
 
-  def show
-  end
-
   def create
     @room = Room.new(room_params)
     @room.flat = @flat
     if @room.save
-      redirect_to new_flat_room_path(@flat)
+      redirect_to new_flat_room_bed_path(@flat, @room)
     else
       render :new, status: :unprocessable_entity
     end
