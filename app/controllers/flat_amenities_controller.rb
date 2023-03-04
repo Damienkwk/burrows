@@ -3,7 +3,7 @@ class FlatAmenitiesController < ApplicationController
 
   def index
     @flat = Flat.find(params[:flat_id])
-    @flat_amenities = FlatAmenity.where(flat_id: @flat)
+    @flat_amenities = FlatAmenity.joins(:amenity).where(flat_id: @flat).order(:category)
   end
 
   def new
