@@ -1,6 +1,11 @@
 .flat-photos {
   display: flex;
   justify-content: space-between;
+
+  img {
+    border-radius: 10px;
+    box-shadow: rgba(149, 157, 165, 0.2) 0px 8px 24px;
+  }
 }
 
 .flat-info-show-page {
@@ -23,7 +28,6 @@
   display: flex;
   justify-content: left;
 }
-
 
 .room {
   position: relative;
