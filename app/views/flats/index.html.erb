@@ -10,7 +10,7 @@
             <%= simple_form_for (@bookmark) do |f| %>
               <%= f.hidden_field :flat_id, value: flat.id %>
               <button id="heart-button" type="submit">
-                <% if current_user.bookmarks.any? { |bookmark| bookmark.flat == flat } %>
+                <% if user_signed_in? && current_user.bookmarks.any? { |bookmark| bookmark.flat == flat } %>
                   <i class="fa-solid fa-heart"></i>
                 <% else %>
                   <i class="fa-regular fa-heart"></i>
