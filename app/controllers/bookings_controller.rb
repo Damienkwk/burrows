@@ -7,6 +7,7 @@ class BookingsController < ApplicationController
   end
 
   def show
+    @total
   end
 
   def create

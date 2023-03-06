@@ -1,0 +1,15 @@
+<div class="container mt-5">
+  <h1>New review</h1>
+  <%= simple_form_for [@booking, @review] do |f| %>
+    <%= f.label :title, class: 'form-label' %>
+    <%= f.input_field :title, class: 'form-control mb-2', :value => if @booking.flat.user == current_user
+      'renter'
+    else
+      'owner'
+    end  %>
+    <%= f.input :content %>
+    <%= f.input :rating, input_html: { min: '1', max: '5', step: '1' }  %>
+    <%= f.submit "Submit review", class: "btn btn-primary" %>
+    <%= link_to 'cancel', booking_path(@booking), class: 'btn btn-primary' %>
+  <% end %>
+</div>
