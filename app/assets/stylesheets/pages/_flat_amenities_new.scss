@@ -1,0 +1,22 @@
+.checkboxes {
+  flex-wrap: wrap;
+  display: flex;
+  justify-content: center;
+}
+
+.collection_check_boxes {
+  border: 1px solid grey;
+  opacity: 0.5;
+  padding: 30px;
+  margin: 10px;
+  border-radius: 10px;
+}
+
+.checkbox {
+  display: none;
+}
+
+input:checked + label {
+  opacity: 1;
+  border: 2px solid grey;
+}
