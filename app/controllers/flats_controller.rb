@@ -9,6 +9,10 @@ class FlatsController < ApplicationController
 
   def show
     @booking = Booking.new
+    @marker = [{
+      lat: @flat.latitude,
+      lng: @flat.longitude
+    }]
   end
 
   def new

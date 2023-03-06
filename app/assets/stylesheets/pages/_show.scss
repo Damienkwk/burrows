@@ -27,6 +27,7 @@
 .existing-rooms {
   display: flex;
   justify-content: left;
+  padding-bottom: 20px;
 }
 
 .room {
@@ -51,6 +52,10 @@
 .show-body {
   display: flex;
   justify-content: space-between;
+}
+
+.show-body-left {
+  flex-grow: 1;
 }
 
 .show-body-right {
