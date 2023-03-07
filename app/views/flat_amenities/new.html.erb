@@ -8,7 +8,7 @@
       <h1>Add Amenities</h1>
 
       <%= simple_form_for [@flat, @flat_amenity] do |f| %>
-        <%= f.association :amenity, label: false, as: :check_boxes, include_hidden: false, wrapper_html: { class: 'checkboxes' }, input_html: { class: 'checkbox' } %>
+        <%= f.association :amenity, label: false, as: :check_boxes, include_hidden: false, wrapper_html: { class: 'amenity-checkboxes' }, input_html: { class: 'amenity-checkbox' } %>
         <%= f.button :submit, class: "btn-ghost" %>
       <% end %>
     </div>

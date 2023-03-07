@@ -7,7 +7,7 @@
         <h3>Sleeping arrangements</h3>
           <p><%= @room.name %></p>
           <%= simple_form_for ([@flat, @room, @bed]) do |f| %>
-            <%= f.input :category, as: :check_boxes, collection: Bed::CATEGORIES %>
+            <%= f.input :category, as: :check_boxes, collection: Bed::CATEGORIES, wrapper_html: { class: 'bed-checkboxes' }, input_html: { class: 'bed-checkbox' }  %>
             <%= f.submit 'Add bed(s) to room', class: "btn-ghost"%>
           <% end %>
       </div>
