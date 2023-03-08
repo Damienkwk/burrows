@@ -89,6 +89,19 @@
 
   </div>
 
+  <div class="amenities mt-4 mb-4 border-bottom">
+    <h3>What this place offers</h3>
+    <div class="amenities-preview">
+      <% @flat_amenities.each do |amenity| %>
+        <div class="amenity-card-preview">
+          <p class="amenity-logo"><%= Amenity.find(amenity.amenity_id).icon.html_safe %></p>
+          <p class="amenity-name"><%= Amenity.find(amenity.amenity_id).name %></p>
+        </div>
+      <% end %>
+    </div>
+    <%= link_to 'Show all amenities', flat_flat_amenities_path(@flat), class: "btn-ghost" %>
+  </div>
+
   <div class="show-map">
     <h3>Where you'll be</h3><br>
     <p>Exact location will be provided after booking.</p><br>

@@ -13,6 +13,7 @@ class FlatsController < ApplicationController
       lat: @flat.latitude,
       lng: @flat.longitude
     }]
+    @flat_amenities = FlatAmenity.where(flat_id: @flat).first(5)
   end
 
   def new
