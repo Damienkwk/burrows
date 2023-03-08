@@ -6,16 +6,17 @@
     <p><%= @flat.address %></p>
     <p><i class="fa-solid fa-person"></i> <%= @flat.number_of_guests %></p>
     <p>$<%= @flat.price_per_night %>/night</p>
-    <p>⭐️
+    <p><i class="fa-solid fa-star"></i>
       <% total = 0 %>
       <% count = 0 %>
       <% @flat.bookings.each do |booking| %>
         <% if booking.reviews != [] %>
-          <% total += booking.reviews.sum(:rating) %>
-          <% count += booking.reviews.count.to_f %>
+          <% total += booking.reviews.sum(:rating).to_f %>
+          <% count += booking.reviews.count %>
         <% end %>
       <% end %>
-      <%= (total/count).round(1) %>
+      <%= (total/count).round(2) unless @flat.bookings.empty? %>
+      <b><u><%= link_to "#{count} reviews" %></b></u>
     </p>
   </div>
 
