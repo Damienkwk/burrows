@@ -1,6 +1,11 @@
 .flat-photos {
   display: flex;
   justify-content: space-between;
+
+  img {
+    border-radius: 10px;
+    box-shadow: rgba(149, 157, 165, 0.2) 0px 8px 24px;
+  }
 }
 
 .flat-info-show-page {
@@ -22,8 +27,8 @@
 .existing-rooms {
   display: flex;
   justify-content: left;
+  padding-bottom: 20px;
 }
-
 
 .room {
   position: relative;
@@ -49,8 +54,18 @@
   justify-content: space-between;
 }
 
+.show-body-left {
+  flex-grow: 1;
+}
+
 .show-body-right {
+  width: 30%;
   padding: 40px;
   margin: 40px;
   box-shadow: rgba(50, 50, 93, 0.25) 0px 6px 12px -2px, rgba(0, 0, 0, 0.3) 0px 3px 7px -3px;
+
+  .btn-ghost {
+    display: block;
+    margin-bottom: 20px;
+  }
 }
