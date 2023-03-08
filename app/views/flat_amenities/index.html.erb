@@ -1,7 +1,11 @@
 <div class="amenity-container">
   <h1>Flat Amenities</h1>
   <% if @flat.user == current_user %>
-    <%= link_to "Add amenities", new_flat_flat_amenity_path, class: "btn-ghost"  %>
+    <% if @flat_amenities.empty? %>
+      <%= link_to "Add amenities", new_flat_flat_amenity_path, class: "btn-ghost"  %>
+    <% else %>
+      <%= link_to "Edit amenities", new_flat_flat_amenity_path, class: "btn-ghost"  %>
+    <% end %>
   <% end %>
   <%= link_to "Back to flat", flat_path(@flat), class: "btn-ghost"  %>
   <% @categorised_flat_amenities.each do |category| %>
