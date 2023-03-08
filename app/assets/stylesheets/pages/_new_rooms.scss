@@ -1,0 +1,17 @@
+.collection_radio_buttons {
+  border: 1px solid grey;
+  opacity: 0.5;
+  padding: 30px;
+  margin: 10px;
+  border-radius: 10px;
+}
+
+.room-radio-buttons {
+  flex-wrap: wrap;
+  display: flex;
+  justify-content: center;
+}
+
+.room-radio-button {
+  display: none;
+}
