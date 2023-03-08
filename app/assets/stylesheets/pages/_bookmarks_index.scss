@@ -1,0 +1,28 @@
+
+.bookmark-card-photo {
+  border-radius: 20px;
+  box-shadow: rgba(149, 157, 165, 0.2) 0px 8px 24px;
+  margin-right: 10px;
+}
+
+.bookmark-card {
+  display: flex;
+  justify-content: left;
+  background-color: rgba(245, 245, 245, 1);
+  margin: 20px 0;
+  padding-bottom: 10px;
+
+  p {
+    margin: 0;
+  }
+}
+
+.bookmark-flat-info {
+  flex-grow: 1;
+  padding: 5px;
+}
+
+.bookmark-flat-name-and-heart, .bookmark-flat-details {
+  display: flex;
+  justify-content: space-between;
+}

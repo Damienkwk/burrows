@@ -1,28 +1,53 @@
-<div class="container mt-5">
-  <h1>Booking Details</h1>
-    <ul>
-      <li>Flat Name: <%= @booking.flat.name %></li>
-      <li>No. Of Guests: <%= @booking.number_of_guests %></li>
-      <li>Booked By: <%= @booking.user.first_name %></li>
-      <li>Check-in Date: <%= @booking.start_date.to_date %></li>
-      <li>Check-out Date: <%= @booking.end_date.to_date %></li>
-      <li>Booking Status: <%= @booking.status %></li>
-      <li>Host: <%= @booking.flat.user.first_name %></li>
-      <li>Rating:
-        <% @total = 0 %>
-        <% @count = 0 %>
-        <% @booking.reviews.each do |review| %>
-          <% if review.title == 'owner' %>
-            <% @total = @total + review.rating %>
-            <% @count = @count + 1 %>
-          <% end %>
+<div class="wrapper">
+  <div class="trip-details">
+    <div class="trip-pic-and-host">
+      <div class="img-container">
+       <%= cl_image_tag @booking.flat.photos.first.key, crop: :fill, opacity: 40, background: "black" %>
+       <h1>Your stay at <%= @booking.flat.user.first_name %>'s place </h1>
+      </div>
+    </div>
+    <div class="reservation-info">
+      <div class="start-end-date border-bottom">
+        <p id="check-in">
+          <strong>Check-in</strong><br>
+          <%= @booking.start_date.to_date %>
+        </p>
+        <p>
+          <strong>Check-out</strong><br>
+          <%= @booking.end_date.to_date %>
+        </p>
+      </div>
+      <div class="booking-status p-2">
+        <% if policy(@booking).edit? %>
+          <h3><%= @booking.user.first_name %>'s' booking at <%= @booking.flat.name %> is <strong><%= @booking.status %></strong></h3>
+        <% else %>
+          <h3>Your booking at <%= @booking.flat.name %> is <strong><%= @booking.status %></strong></h3>
         <% end %>
-        <%= @total/@count.to_f %> ⭐️
-      </li>
-    </ul>
-    <%= link_to 'add reviews', new_booking_review_path(@booking), class: 'btn-ghost' %>
-    <% if policy(@booking).edit? %>
-      <%= link_to 'edit', edit_booking_path(@booking), class: 'btn-ghost' %>
-    <% end %>
-    <%= link_to 'back', bookings_path, class: 'btn-ghost' %>
+      </div>
+      <div class="other-details">
+        <p>
+          <strong>Guests</strong><br>
+          <i class="fa-solid fa-person"></i> <%= @booking.number_of_guests %>
+        </p>
+        <p>
+          <strong>Booked by</strong><br>
+          <%= @booking.user.first_name  %>
+        </p>
+        <p>
+          <strong>Host</strong><br>
+          <%= @booking.flat.user.first_name %>
+        </p>
+      </div>
+      <% if policy(@booking).edit? %>
+        <%= link_to 'edit', edit_booking_path(@booking), class: 'btn-ghost' %>
+      <% end %>
+      <%= link_to 'back', bookings_path, class: 'btn-ghost' %>
+    </div>
+  </div>
+  <div class="map">
+    <div style="width: 800px; height: 100vh;"
+      data-controller="map"
+      data-map-markers-value="<%= @marker.to_json %>"
+      data-map-api-key-value="<%= ENV['MAPBOX_API_KEY'] %>"></div>
+  </div>
 </div>
