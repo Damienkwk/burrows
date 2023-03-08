@@ -6,6 +6,17 @@
     <p><%= @flat.address %></p>
     <p><i class="fa-solid fa-person"></i> <%= @flat.number_of_guests %></p>
     <p>$<%= @flat.price_per_night %>/night</p>
+    <p>⭐️
+      <% total = 0 %>
+      <% count = 0 %>
+      <% @flat.bookings.each do |booking| %>
+        <% if booking.reviews != [] %>
+          <% total += booking.reviews.sum(:rating) %>
+          <% count += booking.reviews.count.to_f %>
+        <% end %>
+      <% end %>
+      <%= (total/count).round(1) %>
+    </p>
   </div>
 
   <div class="flat-photos">
@@ -88,3 +99,4 @@
         data-map-api-key-value="<%= ENV['MAPBOX_API_KEY'] %>"></div>
     </div>
   </div>
+</div>
