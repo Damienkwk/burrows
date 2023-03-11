@@ -1,0 +1,27 @@
+<div class="modal fade" id="amenitiesModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="loginModalHeader"><i class="fa-solid fa-otter"></i> burrows</h5>
+        <button type="button" class="close-modal" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="false">X</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <% @categorised_flat_amenities.each do |category| %>
+          <% unless category.values[0].empty? %>
+            <h2 class="amenity-category"><%= category.keys[0] %></h2>
+            <% category.values.each do |amenities| %>
+              <% amenities.each do |amenity| %>
+                <div class="amenity-card">
+                  <p class="amenity-logo"><%= Amenity.find(amenity.amenity_id).icon.html_safe %></p>
+                  <p class="amenity-name"><%= Amenity.find(amenity.amenity_id).name %></p>
+                </div>
+              <% end %>
+            <% end %>
+          <% end %>
+        <% end %>
+      </div>
+    </div>
+  </div>
+</div>

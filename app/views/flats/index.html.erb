@@ -1,5 +1,11 @@
 <div class="container">
-  <p class="hosting-link"><%= link_to 'Airbnb your home', new_flat_path, class: "btn-ghost" %></p>
+  <p class="hosting-link">
+    <% if user_signed_in? %>
+      <%= link_to 'Airbnb your home', new_flat_path, class: "btn-ghost" %>
+    <% else %>
+      <%= link_to 'Airbnb your home', new_flat_path, class: "btn-ghost", data: {toggle: "modal", target: "#loginModal"} %>
+    <% end %>
+  </p>
   <div class="cards">
     <% @flats.each do |flat| %>
       <div class="card">

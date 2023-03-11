@@ -9,11 +9,13 @@ class FlatsController < ApplicationController
 
   def show
     @booking = Booking.new
+    @bookmark = Bookmark.new
     @marker = [{
       lat: @flat.latitude,
       lng: @flat.longitude
     }]
-    @flat_amenities = FlatAmenity.where(flat_id: @flat).first(5)
+    @flat_amenities_preview = FlatAmenity.where(flat_id: @flat).first(5)
+    flat_amenities
   end
 
   def new
@@ -63,5 +65,22 @@ class FlatsController < ApplicationController
                                  :price_per_night,
                                  :number_of_guests,
                                  photos: [])
+  end
+
+  def flat_amenities
+    set_flat
+    @flat_amenities = policy_scope(FlatAmenity)
+    @flat_amenities = FlatAmenity.where(flat_id: @flat)
+    @categories = Amenity.distinct.pluck(:category)
+    @categorised_flat_amenities = []
+    @categories.each do |category|
+      categorised_amenities = { category => [] }
+      @flat_amenities.each do |flat_amenity|
+        if Amenity.find(flat_amenity.amenity_id).category == category
+          categorised_amenities[category].append(flat_amenity)
+        end
+      end
+      @categorised_flat_amenities.append(categorised_amenities)
+    end
   end
 end
