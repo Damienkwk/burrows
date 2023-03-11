@@ -1,9 +1,10 @@
 // Specific CSS for your home-page
 .cards {
-  display: flex;
-  flex-wrap: wrap;
+  display: grid;
+  gap: 10px;
+  grid-template-columns: 1fr 1fr 1fr 1fr;
+  width: 100%;
   justify-content: space-between;
-  padding: 20px;
 }
 
 .card-photo {
