@@ -1,4 +1,10 @@
-<h1>Edit <%= @flat.name %> Details</h1>
-
-<%= render 'form', flat: @flat %>
-<%= link_to 'Cancel', flat_path(@flat) %>
+<div class="container">
+  <div class="row">
+    <div class="col"></div>
+    <div class="col-6">
+      <h1>Edit details of <%= @flat.name %></h1>
+      <%= render 'form', flat: @flat %>
+    <%= link_to 'Cancel', flat_path(@flat), class: 'btn-ghost' %>
+    </div>
+    <div class="col"></div>
+</div>
