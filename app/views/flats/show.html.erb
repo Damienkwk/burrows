@@ -122,16 +122,17 @@
       <% @flat.bookings.each do |booking| %>
         <% if booking.reviews != [] %>
           <% booking.reviews.each do |review| %>
-            <div class="card-product">
-              <div class="card-product-infos">
-                <h6><u><%= review.user.first_name %></u></h6>
+            <div class="review">
+              <div class="review-content">
+                <p><small><%= review.user.first_name %></small></p>
                 <p><%= review.content %></p>
               </div>
+              <% if review.user == current_user %>
+                <div class="review-actions">
+                  <a href="#"><i class="far fa-trash-alt"></i></a>
+                </div>
+              <% end %>
             </div>
-
-
-
-
           <% end %>
         <% end %>
       <% end %>
