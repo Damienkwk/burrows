@@ -5,6 +5,12 @@ class FlatsController < ApplicationController
   def index
     @flats = policy_scope(Flat)
     @bookmark = Bookmark.new
+    if params[:query].present?
+      results = Geocoder.search(params[:query]).first.coordinates
+      @flats = Flat.near(results, 20)
+    else
+      @flats = Flat.all
+    end
   end
 
   def show
