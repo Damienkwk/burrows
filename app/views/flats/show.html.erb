@@ -41,9 +41,7 @@
 
       <div class="existing-rooms-wrapper mt-4 mb-4 border-bottom">
         <h3>Where you'll be sleeping</h3>
-        <% if @flat.user == current_user %>
-          <%= link_to "Add/edit sleeping arrangements", new_flat_room_path(@flat) %>
-        <% end %>
+
         <div class="existing-rooms border-bottom">
           <% @flat.rooms.each do |room| %>
             <div class="room">
@@ -90,6 +88,7 @@
       <% if @flat.user == current_user %>
         <h3>Update your flat</h3><br>
         <%= link_to 'Edit flat details', edit_flat_path(@flat), class: "btn-ghost" %>
+        <%= link_to "Edit sleeping arrangements", new_flat_room_path(@flat), class: "btn-ghost" %>
         <%= link_to 'Edit amenities', flat_flat_amenities_path(@flat), class: "btn-ghost" %>
         <%= link_to 'Delete flat', flat_path(@flat), data: {turbo_method: :delete, turbo_confirm: "Are you sure?"}, class: "btn-ghost" %>
       <% else %>
