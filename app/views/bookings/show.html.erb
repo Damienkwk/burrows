@@ -10,11 +10,11 @@
       <div class="start-end-date border-bottom">
         <p id="check-in">
           <strong>Check-in</strong><br>
-          <%= @booking.start_date.to_date %>
+          <%= @booking.start_date.to_date.strftime("%d %b %Y") %>
         </p>
         <p>
           <strong>Check-out</strong><br>
-          <%= @booking.end_date.to_date %>
+          <%= @booking.end_date.to_date.strftime("%d %b %Y") %>
         </p>
       </div>
       <div class="booking-status p-2">
