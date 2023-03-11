@@ -1,15 +1,13 @@
 .review {
   display: flex;
   align-items: center;
-  margin-bottom: 8px;
+  margin-bottom: 20px;
   // background: white;
-  padding: 8px 16px;
-  border: 1px solid rgb(235,235,235);
+  border: none;
 }
 
 .review .review-content {
   flex-grow: 1;
-  padding: 0 24px;
 }
 
 .review p {
@@ -33,7 +31,7 @@
 
 .review .review-actions a {
   color: #999999;
-  margin-left: 16px;
+  // margin-left: 16px;
   font-size: 14px;
 }
 
