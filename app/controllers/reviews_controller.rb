@@ -22,7 +22,7 @@ class ReviewsController < ApplicationController
     @review = Review.find(params[:id])
     authorize @review
     @review.destroy
-    redirect_to booking_path(@review.booking), status: :see_other
+    redirect_to flat_path(@review.booking.flat), status: :see_other
   end
 
   private
