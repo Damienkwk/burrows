@@ -7,7 +7,7 @@ class FlatsController < ApplicationController
     @bookmark = Bookmark.new
     if params[:query].present?
       results = Geocoder.search(params[:query]).first.coordinates
-      @flats = Flat.near(results, 100)
+      @flats = Flat.near(results, 20)
     else
       @flats = Flat.all
     end
