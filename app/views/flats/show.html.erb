@@ -135,7 +135,10 @@
               </div>
               <% if review.user == current_user %>
                 <div class="review-actions">
-                  <a href="#"><i class="far fa-trash-alt"></i></a>
+                  <%= link_to '<i class="far fa-trash-alt"></i>'.html_safe,
+                    review_path(review),
+                    data: {turbo_method: :delete, turbo_confirm: "Are you sure?"}
+                  %>
                 </div>
               <% end %>
             </div>
