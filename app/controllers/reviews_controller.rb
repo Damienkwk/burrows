@@ -18,6 +18,13 @@ class ReviewsController < ApplicationController
     end
   end
 
+  def destroy
+    @review = Review.find(params[:id])
+    authorize @review
+    @review.destroy
+    redirect_to booking_path(@review.booking), status: :see_other
+  end
+
   private
 
   def set_booking
