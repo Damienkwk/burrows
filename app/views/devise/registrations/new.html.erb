@@ -28,9 +28,16 @@
     </div>
 
     <div class="form-actions">
-      <%= f.button :submit, "Sign up" %>
+      <%= f.button :submit, "Sign up", class: 'btn-ghost' %>
     </div>
   <% end %>
 
-  <%= render "devise/shared/links" %>
+   <div class="authentication-links">
+    <div class="authentication-actions">
+      <%- if controller_name != 'sessions' %>
+        <%= link_to "Already signed up? Log in here.", new_session_path(resource_name) %><br />
+      <% end %>
+    </div>
+  </div>
+
 </div>
