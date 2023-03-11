@@ -15,8 +15,10 @@
           <% count += booking.reviews.count %>
         <% end %>
       <% end %>
-      <%= (total/count).round(2) unless @flat.bookings.empty? %>
-      <b><u><%= link_to "#{count} reviews" %></b></u>
+      <% if total != 0 && count != 0 %>
+        <%= (total/count).round(2) unless @flat.bookings.empty? %>
+      <% end %>
+      <b><u><a href="#reviews"><%= "#{count} reviews" %></a></b></u>
     </p>
   </div>
 
@@ -112,5 +114,26 @@
         data-map-markers-value="<%= @marker.to_json %>"
         data-map-api-key-value="<%= ENV['MAPBOX_API_KEY'] %>"></div>
     </div>
+  </div>
+
+  <hr>
+  <div id="reviews">
+    <h3>Reviews</h3>
+      <% @flat.bookings.each do |booking| %>
+        <% if booking.reviews != [] %>
+          <% booking.reviews.each do |review| %>
+            <div class="card-product">
+              <div class="card-product-infos">
+                <h6><u><%= review.user.first_name %></u></h6>
+                <p><%= review.content %></p>
+              </div>
+            </div>
+
+
+
+
+          <% end %>
+        <% end %>
+      <% end %>
   </div>
 </div>

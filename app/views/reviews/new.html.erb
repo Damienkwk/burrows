@@ -1,8 +1,8 @@
 <div class="container mt-5">
-  <h1>New review</h1>
+  <h1>New review for <%= @booking.flat.name %></h1>
   <%= simple_form_for [@booking, @review] do |f| %>
-    <%= f.label :title, class: 'form-label' %>
-    <%= f.input_field :title, class: 'form-control mb-2', :value => if @booking.flat.user == current_user
+    <%= f.label :title, class: 'form-label', hidden: true %>
+    <%= f.input_field :title, class: 'form-control mb-2', hidden: true, :value => if @booking.flat.user == current_user
       'renter'
     else
       'owner'
